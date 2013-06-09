@@ -15,8 +15,8 @@ bdfFile = strcat('/Users/Shared/Experiments/',expDir,'/',bdfFileName)
 for subjNum = subjNumList
     
     subjFileName = strcat(expName, '_S', int2str(subjNum), '.set')
-    outFileName = strcat(expName, '_S', int2str(subjNum),'_elist_bins_be_item_test.set')
-    evFileName = strcat(filePath, expName, '_S',int2str(subjNum),'_evlist_item_test.txt')
+    outFileName = strcat(expName, '_S', int2str(subjNum),'_elist_bins_be.set')
+    evFileName = strcat(filePath, expName, '_S',int2str(subjNum),'_evlist.txt')
     
     %%loading data
     EEG = pop_loadset('filename',subjFileName,'filepath',filePath);

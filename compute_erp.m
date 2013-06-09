@@ -13,8 +13,8 @@ filePath = strcat('/Users/Shared/Experiments/',expDir,'/data/');
 
 for subjNum = subjNumList
     
-    subjFileName = strcat('EEGLAB_sets/',expName, '_S', int2str(subjNum), '_elist_bins_be_ar_item_test.set')
-    outFileName = strcat('ERPs/',expName, '_S', int2str(subjNum), '_item_test.erp')
+    subjFileName = strcat('EEGLAB_sets/',expName, '_S', int2str(subjNum), '_elist_bins_be_ar.set')
+    outFileName = strcat('ERPs/',expName, '_S', int2str(subjNum), '.erp')
     
     %%loading data
     EEG = pop_loadset('filename',subjFileName,'filepath',filePath);
