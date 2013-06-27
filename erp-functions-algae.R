@@ -28,6 +28,8 @@ avgWinERP <- function(erpData, subjNum, condNum, epBeg, epEnd, sampleRate, t1, t
 
 #This function calls the previous two functions to create a dataframe containing mean over selected
 #time-window for all subjects and conditions of interest
+#ex: allData.df <- allSubjCondWin('MOOSE','Moose',c(1:4,6:29,31,33:36), c(1,2), -100, 798, 2, 300,500)
+
 allSubjCondWin <- function(expDir, expName, subjList, condList, epBeg, epEnd, sampleRate, t1, t2){
   for (subj in subjList){
     for (cond in condList){
