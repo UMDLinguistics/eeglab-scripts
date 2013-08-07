@@ -1,7 +1,9 @@
-%%%Input raw file, output re-referenced, epoched file
+%%%Input raw file, output re-referenced, baselined, epoched file
+%%%This script assumes that all the pre-stimulus points are used to compute
+%%%the baseline
 
 %%Example
-%%epoch_set('MOOSE','Moose',[1 2], 1, 'Moose_bdf.txt'
+%%epoch_set('MOOSE','Moose',[1:18], 1, 'Moose_bdf.txt', -100,800)
 
 function epoch_set(expDir, expName, subjNumList, rerefQ, bdfFileName, epStart, epEnd)
 
@@ -32,8 +34,8 @@ for subjNum = subjNumList
     [ALLEEG EEG CURRENTSET] = pop_newset(ALLEEG, EEG, 2,'gui','off');
     [ALLEEG, EEG, CURRENTSET] = eeg_store( ALLEEG, EEG, CURRENTSET );
  
-    %%extracting epochs
-    EEG = pop_epochbin( EEG , [epStart  epEnd],  'pre');
+    %%extracting baselined epochs
+    EEG = pop_epochbin( EEG , [epStart  epEnd],  'pre'); %%baselined with pre-stimulus interval
     [ALLEEG EEG CURRENTSET] = pop_newset(ALLEEG, EEG, 3,'gui','off');
     [ALLEEG, EEG, CURRENTSET] = eeg_store( ALLEEG, EEG, CURRENTSET );
 
