@@ -1,7 +1,9 @@
 %%Take ERP data to text format for R, samples x channels, for a given
-%%condition
+%%list of subjects in one condition (run once for each condition)
 
-function erp2R(expDir, expName, subjNumList, cond)
+%%condition numbers follow the order defined in your bin definition file
+
+function erp2R(expDir, expName, subjNumList, cond,lpfilt)
 
 filePath = strcat('/Users/Shared/Experiments/',expDir,'/');
 
@@ -9,8 +11,11 @@ filePath = strcat('/Users/Shared/Experiments/',expDir,'/');
 
 
 for subjNum = subjNumList
-    
-    subjFileName = strcat('data/ERPs/',expName, '_S', int2str(subjNum), '.erp');
+    if lpfilt == 0
+        subjFileName = strcat('data/ERPs/',expName, '_S', int2str(subjNum), '.erp')
+    else
+        subjFileName = strcat('data/ERPs/',expName, '_S', int2str(subjNum),'_lp',int2str(lpfilt),'.erp')
+    end
     outFileName = strcat(filePath,'results/R/ERP_txt/',expName, '_S', int2str(subjNum), '_c',int2str(cond),'.txt');
     
     %%loading data
