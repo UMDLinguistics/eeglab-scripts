@@ -22,8 +22,19 @@ for subjNum = subjNumList
     EEG = pop_loadset('filename',subjFileName,'filepath',filePath);
     [ALLEEG, EEG, CURRENTSET] = eeg_store( ALLEEG, EEG, 0 );
     
+
+   %%interpolate bad channels
+   if ~isempty(badChan)
+       backupFile = strcat('EEGLAB_sets/',expName, '_S', int2str(subjNum), '_elist_bins_be_unint.set')
+       EEG = pop_saveset( EEG, 'filename',backupFile,'filepath',filePath);   
+       EEG = eeg_interp(EEG, badChan);
+       EEG = pop_saveset( EEG, 'filename',subjFileName,'filepath',filePath);
+   end
+    
+    
     %%peak to peak threshold for general noise on regular channels
-    test_channels = setxor([1:30],badChan);
+    %test_channels = setxor([1:30],badChan);
+    test_channels = [1:30];
     EEG  = pop_artmwppth( EEG , 'Channel',  test_channels, 'Flag', [ 1 2], 'Review', 'on', 'Threshold',  ptpThresh, 'Twindow', [ rejStart rejEnd], 'Windowsize',  200, 'Windowstep',  100 );
     EEG = eeg_checkset( EEG );
 
@@ -32,14 +43,19 @@ for subjNum = subjNumList
     EEG = eeg_checkset( EEG );
 
     %%HEOG threshold for blinking, step function
-    EEG  = pop_artstep( EEG , 'Channel',  31, 'Flag', [ 1 3], 'Review', 'on', 'Threshold',  heogThresh, 'Twindow', [ rejStart rejEnd], 'Windowsize',  200, 'Windowstep',  50 );
+    EEG  = pop_artstep( EEG , 'Channel',  31, 'Flag', [ 1 4], 'Review', 'on', 'Threshold',  heogThresh, 'Twindow', [ rejStart rejEnd], 'Windowsize',  200, 'Windowstep',  50 );
     EEG = eeg_checkset( EEG );
 
     %%output documentation file
     pop_summary_AR_eeg_detection(EEG, outTextName);
 
+    
+    
     %%save dataset
+       
     EEG = eeg_checkset( EEG );
     EEG = pop_saveset( EEG, 'filename',outFileName,'filepath',filePath);
+    
+
    
 end
