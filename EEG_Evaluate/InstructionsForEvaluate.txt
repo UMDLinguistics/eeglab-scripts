@@ -1,0 +1,43 @@
+Instructions for evaluate.py or eval_mtest.py 
+--Anna Namyst, CNL Lab, Spring 2014
+
+Introduction: 
+Evaluate.py was designed to evaluate participant responses in EEG, MEG, and MRI experiments from Matlab logs for WordPres and SentEEG/SentMEG experiments.
+
+Catalogue of Available Scripts:
+
+	*EEG Studies
+		EEG_evaluate_mtest.py
+		
+	*MEG Studies 
+		Narwhal: eval_Narwhal.py, eval_sp.py
+		LindyHop: eval_LH.py
+	(MEG trigger codes vary by Experiment, so the scripts are currently tailored for each 
+	study. Eventually, there will be a MEG_evaluate_mtest.py available. For now, choose 
+	one of the existing scripts and adjust accordingly.)
+
+Walkthrough:
+
+1. Set-up
+	a.Make sure that your Matlab logs are in the proper location:
+		For EEG studies:
+			filepath= '/Users/Shared/Experiments/YOUREXPERIMENT/data/logs'
+			#Future update: ...../matlab_logs
+		For MEG studies:
+			filepath = '/Users/Shared/Experiments/YOUREXPERIMENT/data/YOURSUBJECT/logs'
+
+	b. Create a scoring key specific to your trigger codes and response codes.
+		Currently (Spring 2014) this key must live in the same folder as the evaluate 
+		script. Eventually, the key may be called from the Experiment directory like 
+		"CondCodes" for MEG processing.
+		
+2. Running the script
+	a. The arguments you must provide are as follows:
+		--subjID: e.g. ELK_S02
+		--expt: Your experiment and the name of your Experiment in the "Shared/Experiments" folder
+		--exptkey
+		--paradigm	
+
+	
+
+	
